@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Aktualne IP komputera</title>
-</head>
-<body onload="getIP()">
-  <script>
-    // Funkcja pobiera adres IP i przekierowuje użytkownika na stronę z samym adresem IP.
-    function getIP() {
+  <head>
+    <meta charset="UTF-8">
+    <title>Aktualny adres IP</title>
+  </head>
+  <body>
+    <h1>Aktualny adres IP Twojego komputera:</h1>
+    <p id="ip"></p>
+
+    <script>
+      // Pobierz aktualny adres IP za pomocą API
       fetch('https://api.ipify.org?format=json')
         .then(response => response.json())
         .then(data => {
-          window.location.href = `http://${data.ip}`;
+          document.getElementById('ip').textContent = data.ip;
+        })
+        .catch(error => {
+          console.error('Błąd pobierania adresu IP:', error);
         });
-    }
-  </script>
-</body>
+    </script>
+  </body>
 </html>
